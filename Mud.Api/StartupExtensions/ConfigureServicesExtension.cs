@@ -75,6 +75,8 @@ public static class ConfigureServicesExtension
                 };
             });
 
+        services.AddHttpContextAccessor();
+        
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<ITokenService, TokenService>();
 

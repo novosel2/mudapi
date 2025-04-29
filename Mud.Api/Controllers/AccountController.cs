@@ -15,6 +15,9 @@ public class AccountController : ControllerBase
         _accountService = accountService;
     }
 
+    
+    // POST: /api/auth/register
+    
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDto registerDto)
     {
@@ -23,6 +26,9 @@ public class AccountController : ControllerBase
         return Ok(accountResponse);
     }
 
+    
+    // POST: /api/auth/login
+    
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto loginDto)
     {
