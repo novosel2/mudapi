@@ -78,8 +78,10 @@ public static class ConfigureServicesExtension
         services.AddHttpContextAccessor();
         
         services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<ICharacterService, CharacterService>();
         services.AddScoped<ITokenService, TokenService>();
 
+        services.AddScoped<ICharacterRepository, CharacterRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();
     }
 }

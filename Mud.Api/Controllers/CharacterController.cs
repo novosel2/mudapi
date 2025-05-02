@@ -18,6 +18,16 @@ public class CharacterController : ControllerBase
     }
 
 
+    // GET: /api/character
+    [HttpGet]
+    public async Task<IActionResult> GetCharacters()
+    {
+        var characters = await _characterService.GetAllAsync();
+        
+        return Ok(characters);
+    }
+    
+    
     // POST: /api/character
     
     [HttpPost]
