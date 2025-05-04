@@ -28,13 +28,34 @@ public class CharacterController : ControllerBase
     }
     
     
+    // GET: /api/character/{id}
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetCharacter(Guid id)
+    {
+        var character = await _characterService.GetByIdAsync(id);
+        
+        return Ok(character);
+    }
+    
+    
     // POST: /api/character
     
     [HttpPost]
-    public async Task<IActionResult> AddCharacter(CharacterAddRequest character)
+    public async Task<IActionResult> AddCharacter(CharacterAddRequest characterAddRequest)
     {
-        var characterResponse = await _characterService.AddAsync(character);
+        var character = await _characterService.AddAsync(characterAddRequest);
         
-        return Ok(characterResponse);
+        return Ok(character);
+    }
+    
+    
+    // PUT: /api/character
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateCharacter(CharacterUpdateRequest characterUpdateRequest)
+    {
+        var character = await _characterService.UpdateAsync(characterUpdateRequest);
+        
+        return Ok(character);
     }
 }

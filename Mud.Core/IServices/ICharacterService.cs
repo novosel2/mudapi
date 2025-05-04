@@ -12,6 +12,13 @@ public interface ICharacterService
     public Task<List<CharacterResponse>> GetAllAsync();
     
     /// <summary>
+    /// Gets a character by id.
+    /// </summary>
+    /// <param name="id">ID of character</param>
+    /// <returns>Character response</returns>
+    public Task<CharacterResponse> GetByIdAsync(Guid id);
+    
+    /// <summary>
     /// Adds a character to the database
     /// </summary>
     /// <param name="character">Character object to add</param>
@@ -19,8 +26,9 @@ public interface ICharacterService
     public Task<CharacterResponse> AddAsync(CharacterAddRequest character);
     
     /// <summary>
-    /// Checks if any changes are saved to the database
+    /// Updates a character in the database.
     /// </summary>
-    /// <returns>True if changes are saved, otherwise false</returns>
-    public Task<bool> IsSavedAsync();
+    /// <param name="character">Character with updated information</param>
+    /// <returns>Character response with updated information</returns>
+    public Task<CharacterResponse> UpdateAsync(CharacterUpdateRequest character);
 }
