@@ -80,6 +80,7 @@ public static class ConfigureServicesExtension
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<ICharacterService, CharacterService>();
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<CurrentAccountService>();
 
         services.AddScoped<ICharacterRepository, CharacterRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();

@@ -1,5 +1,4 @@
 ﻿using Mud.Core.Dto.Character;
-using Mud.Core.Entities;
 using Mud.Core.Exceptions;
 using Mud.Core.IRepositories;
 using Mud.Core.IServices;
@@ -41,6 +40,9 @@ public class CharacterService : ICharacterService
     public async Task<CharacterResponse> AddAsync(CharacterAddRequest characterAddRequest)
     {
         var character = characterAddRequest.ToCharacter(_accountId, _username);
+        
+        if (await _characterRepository.AccountCharacterExistsAsync(_accountId))
+            throw new AlreadyExistsException("Account already has a character.");
         
         var createdCharacter = await _characterRepository.AddAsync(character);
 

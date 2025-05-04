@@ -1,7 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Logging;
 using Mud.Api.StartupExtensions;
-using Mud.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

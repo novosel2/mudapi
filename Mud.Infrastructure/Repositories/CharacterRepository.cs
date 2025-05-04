@@ -43,6 +43,11 @@ public class CharacterRepository : ICharacterRepository
         return Task.FromResult(existingCharacter);
     }
 
+    public async Task<bool> AccountCharacterExistsAsync(Guid accountId)
+    {
+        return await _db.Characters.AnyAsync(x => x.AccountId == accountId);
+    }
+
 
     // Checks if any changes are saved to the database. Returns true if there are changes saved, false otherwise.
     public async Task<bool> IsSavedAsync()
