@@ -14,6 +14,8 @@ public class HandleExceptionFilter : IExceptionFilter
         {
             AlreadyExistsException => CreateProblemDetails(400, "Already exists", exception.Message),
             UnauthorizedAccessException => CreateProblemDetails(401, "Unauthorized", exception.Message),
+            NotFoundException => CreateProblemDetails(404, "Not found", exception.Message),
+            ForbiddenException => CreateProblemDetails(403, "Forbidden", exception.Message),
             _ => throw exception
         };
 

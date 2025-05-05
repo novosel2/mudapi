@@ -52,6 +52,21 @@ public class CharacterService : ICharacterService
         return createdCharacter.ToResponse();
     }
 
+    // Deletes a character in the database
+    public async Task DeleteAsync(Guid id)
+    {
+        var character = await _characterRepository.GetByIdAsync(id)
+            ?? throw new NotFoundException($"Character with id {id} not found.");
+        
+        if (character.AccountId != _accountId)
+            throw new ForbiddenException("Action not allowed.");
+        
+        await _characterRepository.DeleteAsync(character);
+        
+        if (! await _characterRepository.IsSavedAsync())
+            throw new DbSavingFailedException("Failed to delete character in the database.");
+    }
+
     // Updates a character in the database.
     public async Task<CharacterResponse> UpdateAsync(CharacterUpdateRequest characterUpdateRequest)
     {

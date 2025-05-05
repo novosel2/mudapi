@@ -43,6 +43,14 @@ public class CharacterRepository : ICharacterRepository
         return Task.FromResult(existingCharacter);
     }
 
+    // Deletes a character in the database
+    public Task<Character> DeleteAsync(Character character)
+    {
+        var characterEntry = _db.Characters.Remove(character);
+        
+        return Task.FromResult(characterEntry.Entity);
+    }
+
     public async Task<bool> AccountCharacterExistsAsync(Guid accountId)
     {
         return await _db.Characters.AnyAsync(x => x.AccountId == accountId);

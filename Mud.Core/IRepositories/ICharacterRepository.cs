@@ -31,6 +31,8 @@ public interface ICharacterRepository
     /// <param name="updatedCharacter">Character with updated information</param>
     /// <returns>Updated character</returns>
     public Task<Character> UpdateAsync(Character existingCharacter, Character updatedCharacter);
+    
+    public Task<Character> DeleteAsync(Character character);
 
     /// <summary>
     /// Checks if an account has a character.
