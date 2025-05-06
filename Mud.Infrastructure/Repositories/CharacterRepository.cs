@@ -17,13 +17,17 @@ public class CharacterRepository : ICharacterRepository
     // Gets all characters from the database
     public async Task<List<Character>> GetAllAsync()
     {
-        return await _db.Characters.ToListAsync();
+        return await _db.Characters
+            .Include(c => c.Class)
+            .ToListAsync();
     }
 
     // Gets a character by id.
     public async Task<Character?> GetByIdAsync(Guid id)
     {
-        return await _db.Characters.SingleOrDefaultAsync(x => x.Id == id);
+        return await _db.Characters
+            .Include(c => c.Class)
+            .SingleOrDefaultAsync(x => x.Id == id);
     }
 
     // Adds a character to the database

@@ -14,7 +14,7 @@ public class CharacterResponse
 
 public static class CharacterExtension
 {
-    public static CharacterResponse ToResponse(this Entities.Character character)
+    public static CharacterResponse ToResponse(this Entities.Character character, string? className = null)
     {
         return new CharacterResponse
         {
@@ -24,7 +24,7 @@ public static class CharacterExtension
             Level = character.Level,
             Experience = character.Experience,
             Health = character.Health,
-            ClassName = character.Class.Name,
+            ClassName = className ?? character.Class?.Name ?? "None",
             EquippedItemName = character.EquippedItem?.Name ?? "None"
         };
     }

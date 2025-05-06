@@ -1,4 +1,6 @@
-﻿namespace Mud.Core.Entities;
+﻿using Mud.Core.Dto.Character;
+
+namespace Mud.Core.Entities;
 
 public class Character
 {

@@ -7,7 +7,7 @@ namespace Mud.Api.Controllers;
 
 [Authorize]
 [ApiController]
-[Route("api/character")]
+[Route("api/characters")]
 public class CharacterController : ControllerBase
 {
     private readonly ICharacterService _characterService;
@@ -18,7 +18,7 @@ public class CharacterController : ControllerBase
     }
 
 
-    // GET: /api/character
+    // GET: /api/characters
     [HttpGet]
     public async Task<IActionResult> GetCharacters()
     {
@@ -28,7 +28,7 @@ public class CharacterController : ControllerBase
     }
     
     
-    // GET: /api/character/{id}
+    // GET: /api/characters/{id}
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetCharacter(Guid id)
     {
@@ -38,7 +38,7 @@ public class CharacterController : ControllerBase
     }
     
     
-    // POST: /api/character
+    // POST: /api/characters
     
     [HttpPost]
     public async Task<IActionResult> AddCharacter(CharacterAddRequest characterAddRequest)
@@ -49,7 +49,7 @@ public class CharacterController : ControllerBase
     }
     
     
-    // PUT: /api/character
+    // PUT: /api/characters
 
     [HttpPut]
     public async Task<IActionResult> UpdateCharacter(CharacterUpdateRequest characterUpdateRequest)
@@ -57,5 +57,16 @@ public class CharacterController : ControllerBase
         var character = await _characterService.UpdateAsync(characterUpdateRequest);
         
         return Ok(character);
+    }
+    
+    
+    // DELETE: /api/characters/{id}
+    
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteCharacter(Guid id)
+    {
+        await _characterService.DeleteAsync(id);
+        
+        return Ok();
     }
 }

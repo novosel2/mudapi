@@ -77,12 +77,14 @@ public static class ConfigureServicesExtension
 
         services.AddHttpContextAccessor();
         
-        services.AddScoped<IAccountService, AccountService>();
-        services.AddScoped<ICharacterService, CharacterService>();
-        services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<CurrentAccountService>();
-
-        services.AddScoped<ICharacterRepository, CharacterRepository>();
+        services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<ICharacterService, CharacterService>();
+        services.AddScoped<IClassService, ClassService>();
+        
         services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<ICharacterRepository, CharacterRepository>();
+        services.AddScoped<IClassRepository, ClassRepository>();
     }
 }
