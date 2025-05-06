@@ -9,7 +9,7 @@ public class HandleExceptionFilter : IExceptionFilter
     public void OnException(ExceptionContext context)
     {
         var exception = context.Exception;
-
+        
         ProblemDetails problemDetails = exception switch
         {
             AlreadyExistsException => CreateProblemDetails(400, "Already exists", exception.Message),
