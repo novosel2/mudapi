@@ -22,7 +22,7 @@ public class CharacterController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCharacters()
     {
-        var characters = await _characterService.GetAllAsync();
+        List<CharacterResponse> characters = await _characterService.GetAllAsync();
         
         return Ok(characters);
     }
@@ -32,7 +32,7 @@ public class CharacterController : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetCharacter(Guid id)
     {
-        var character = await _characterService.GetByIdAsync(id);
+        CharacterResponse character = await _characterService.GetByIdAsync(id);
         
         return Ok(character);
     }
@@ -43,7 +43,7 @@ public class CharacterController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddCharacter(CharacterAddRequest characterAddRequest)
     {
-        var character = await _characterService.AddAsync(characterAddRequest);
+        CharacterResponse character = await _characterService.AddAsync(characterAddRequest);
         
         return Ok(character);
     }
@@ -54,7 +54,7 @@ public class CharacterController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> UpdateCharacter(CharacterUpdateRequest characterUpdateRequest)
     {
-        var character = await _characterService.UpdateAsync(characterUpdateRequest);
+        CharacterResponse character = await _characterService.UpdateAsync(characterUpdateRequest);
         
         return Ok(character);
     }
