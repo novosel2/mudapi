@@ -1,5 +1,6 @@
 ﻿using Mud.Core.Dto.Party;
 using Mud.Core.Entities;
+using Mud.Core.Exceptions;
 using Mud.Core.IRepositories;
 using Mud.Core.IServices;
 
@@ -8,10 +9,12 @@ namespace Mud.Core.Services;
 public class PartyService : IPartyService
 {
     private readonly IPartyRepository _partyRepository;
+    private readonly Guid _accountId;
     
-    public PartyService(IPartyRepository partyRepository)
+    public PartyService(IPartyRepository partyRepository, CurrentAccountService currentAccountService)
     {
         _partyRepository = partyRepository;
+        _accountId = currentAccountService.CurrentAccountId ?? throw new UnauthorizedAccessException("Unauthorized access.");
     }
     
     // Gets all parties from the database
@@ -24,14 +27,39 @@ public class PartyService : IPartyService
     }
 
     // Gets all parties that are available for joining
-    public Task<PartyResponse> GetAllAvailableAsync()
+    public async Task<List<PartyResponse>> GetAllAvailableAsync()
     {
-        throw new NotImplementedException();
+        List<Party> parties = await _partyRepository.GetAllAvailableAsync();
+        List<PartyResponse> partyResponses = parties.Select(p => p.ToResponse()).ToList();
+        
+        return partyResponses;
     }
 
     // Creates a party in the database
-    public Task<PartyResponse> CreatePartyAsync()
+    public async Task<PartyResponse> CreatePartyAsync()
     {
-        throw new NotImplementedException();
+        Party? party = await _partyRepository.GetByLeaderIdAsync(_accountId);
+        
+        if (party != null)
+            throw new AlreadyExistsException("Account already has a party.");
+        
+        party = new Party();
+        PartyMember leader = new PartyMember()
+        {
+            CharacterId = _accountId,
+            PartyId = party.Id,
+            IsLeader = true,
+            IsReady = false
+        };
+
+        party.Members.Add(leader);
+        
+        party = await _partyRepository.CreatePartyAsync(party);
+        party.Members.Add(leader);
+
+        if (!await _partyRepository.IsSavedAsync())
+            throw new DbSavingFailedException("Failed to save party to the database.");
+        
+        return party.ToResponse();        
     }
 }

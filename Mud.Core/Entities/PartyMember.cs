@@ -23,6 +23,6 @@ public class PartyMember
     [Required]
     public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
 
-    public Character? Character { get; set; }
+    public virtual Character Character { get; set; } = null!;
     public Party? Party { get; set; }
 }

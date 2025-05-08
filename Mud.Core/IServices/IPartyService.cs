@@ -14,7 +14,7 @@ public interface IPartyService
     /// Gets all parties available for joining
     /// </summary>
     /// <returns>List of available party responses</returns>
-    public Task<PartyResponse> GetAllAvailableAsync();
+    public Task<List<PartyResponse>> GetAllAvailableAsync();
 
     /// <summary>
     /// Creates a new party

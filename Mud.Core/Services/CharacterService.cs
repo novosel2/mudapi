@@ -59,12 +59,12 @@ public class CharacterService : ICharacterService
     }
 
     // Deletes a character in the database
-    public async Task DeleteAsync(Guid id)
+    public async Task DeleteAsync()
     {
-        Character character = await _characterRepository.GetByIdAsync(id)
-            ?? throw new NotFoundException($"Character with id {id} not found.");
+        Character character = await _characterRepository.GetByIdAsync(_accountId)
+            ?? throw new NotFoundException($"Character with id {_accountId} not found.");
         
-        if (character.AccountId != _accountId)
+        if (character.Id != _accountId)
             throw new ForbiddenException("Action not allowed.");
         
         await _characterRepository.DeleteAsync(character);

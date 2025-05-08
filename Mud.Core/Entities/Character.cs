@@ -1,6 +1,4 @@
-﻿using Mud.Core.Dto.Character;
-
-namespace Mud.Core.Entities;
+﻿namespace Mud.Core.Entities;
 
 public class Character
 {
@@ -21,6 +19,4 @@ public class Character
     
     public Guid? EquippedItemId { get; set; }
     public Item? EquippedItem { get; set; }
-    
-    public Guid AccountId { get; set; }
 }

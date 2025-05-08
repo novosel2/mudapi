@@ -17,9 +17,9 @@ public class CharacterInstanceState
     public Guid CurrentRoomId { get; set; }
 
     [Required] 
-    public int PosX { get; set; } = 0;
+    public int PosX { get; set; }
     [Required] 
-    public int PosY { get; set; } = 0;
+    public int PosY { get; set; }
     
     public Character? Character { get; set; }
     public DungeonInstance? Instance { get; set; }

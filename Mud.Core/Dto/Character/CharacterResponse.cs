@@ -2,7 +2,7 @@
 
 public class CharacterResponse
 {
-    public Guid Id { get; set; }
+    public Guid CharacterId { get; set; }
     public string Name { get; set; } = string.Empty;
     public string AccountUsername { get; set; } = string.Empty;
     public int Level { get; set; }
@@ -18,13 +18,13 @@ public static class CharacterExtension
     {
         return new CharacterResponse
         {
-            Id = character.Id,
+            CharacterId = character.Id,
             Name = character.Name,
             AccountUsername = character.AccountUsername,
             Level = character.Level,
             Experience = character.Experience,
             Health = character.Health,
-            ClassName = className ?? character.Class?.Name ?? "None",
+            ClassName = className ?? character.Class.Name,
             EquippedItemName = character.EquippedItem?.Name ?? "None"
         };
     }

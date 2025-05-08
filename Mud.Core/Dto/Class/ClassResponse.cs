@@ -2,7 +2,7 @@
 
 public class ClassResponse
 {
-    public Guid Id { get; set; }
+    public Guid ClassId { get; set; }
     
     public string Name { get; set; } = string.Empty;
     
@@ -21,7 +21,7 @@ public static class ClassExtension
     {
         return new ClassResponse
         {
-            Id = varClass.Id,
+            ClassId = varClass.Id,
             Name = varClass.Name,
             Intelligence = varClass.Intelligence,
             Strength = varClass.Strength,

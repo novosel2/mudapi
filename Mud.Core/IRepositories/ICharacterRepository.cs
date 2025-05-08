@@ -32,6 +32,11 @@ public interface ICharacterRepository
     /// <returns>Updated character</returns>
     public Task<Character> UpdateAsync(Character existingCharacter, Character updatedCharacter);
     
+    /// <summary>
+    /// Deletes a character in the database.
+    /// </summary>
+    /// <param name="character">Character to be deleted</param>
+    /// <returns>Deleted character object</returns>
     public Task<Character> DeleteAsync(Character character);
 
     /// <summary>

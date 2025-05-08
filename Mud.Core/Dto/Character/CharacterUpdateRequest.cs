@@ -19,7 +19,6 @@ public class CharacterUpdateRequest
             Id = Id,
             Name = Name,
             ClassId = character.ClassId,
-            AccountId = character.AccountId,
             AccountUsername = character.AccountUsername,
             Level = character.Level,
             Experience = character.Experience,

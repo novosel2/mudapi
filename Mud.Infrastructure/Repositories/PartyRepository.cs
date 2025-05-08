@@ -20,6 +20,7 @@ public class PartyRepository : IPartyRepository
         return await _db.Parties
             .Include(p => p.Members)
             .ThenInclude(m => m.Character)
+            .ThenInclude(c => c.Class)
             .ToListAsync();
     }
 
@@ -30,7 +31,7 @@ public class PartyRepository : IPartyRepository
             .Where(p => p.Members.Count < 4)
             .Include(p => p.Members)
             .ThenInclude(m => m.Character)
-            .ToListAsync();;
+            .ToListAsync();
     }
 
     // Creates a party in the database
@@ -39,5 +40,19 @@ public class PartyRepository : IPartyRepository
         var partyEntry = await _db.Parties.AddAsync(party);
         
         return partyEntry.Entity;
+    }
+
+    // Gets a party by leader id
+    public async Task<Party?> GetByLeaderIdAsync(Guid leaderId)
+    {
+        return await _db.Parties.SingleOrDefaultAsync(p => p.Members.Any(m => m.CharacterId == leaderId && m.IsLeader));
+    }
+
+    // Checks if any changes are saved to the database. Returns true if there are changes saved, false otherwise.
+    public async Task<bool> IsSavedAsync()
+    {
+        int saved = await _db.SaveChangesAsync();
+        
+        return saved > 0;
     }
 }

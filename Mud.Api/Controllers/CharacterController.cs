@@ -60,12 +60,12 @@ public class CharacterController : ControllerBase
     }
     
     
-    // DELETE: /api/characters/{id}
+    // DELETE: /api/characters
     
-    [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> DeleteCharacter(Guid id)
+    [HttpDelete]
+    public async Task<IActionResult> DeleteCharacter()
     {
-        await _characterService.DeleteAsync(id);
+        await _characterService.DeleteAsync();
         
         return Ok();
     }

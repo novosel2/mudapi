@@ -82,9 +82,11 @@ public static class ConfigureServicesExtension
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<ICharacterService, CharacterService>();
         services.AddScoped<IClassService, ClassService>();
+        services.AddScoped<IPartyService, PartyService>();
         
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<ICharacterRepository, CharacterRepository>();
         services.AddScoped<IClassRepository, ClassRepository>();
+        services.AddScoped<IPartyRepository, PartyRepository>();
     }
 }

@@ -22,4 +22,17 @@ public interface IPartyRepository
     /// <param name="party">Party to be created</param>
     /// <returns>Created party</returns>
     public Task<Party> CreatePartyAsync(Party party);
+    
+    /// <summary>
+    /// Gets a party by leader id.
+    /// </summary>
+    /// <param name="leaderId">ID of leader member</param>
+    /// <returns>Party object with specified leader id</returns>
+    public Task<Party?> GetByLeaderIdAsync(Guid leaderId);
+    
+    /// <summary>
+    /// Checks if any changes are saved to the database. Returns true if there are changes saved, false otherwise.
+    /// </summary>
+    /// <returns>True if changes are saved to a database, otherwise false</returns>
+    public Task<bool> IsSavedAsync();
 }

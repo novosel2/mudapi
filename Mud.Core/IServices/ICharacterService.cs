@@ -28,9 +28,8 @@ public interface ICharacterService
     /// <summary>
     /// Deletes a character in the database
     /// </summary>
-    /// <param name="id">ID of character</param>
     /// <returns>Character response of deleted character</returns>
-    public Task DeleteAsync(Guid id);
+    public Task DeleteAsync();
     
     /// <summary>
     /// Updates a character in the database.

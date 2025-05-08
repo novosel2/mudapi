@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Mud.Core.Entities;
 
 namespace Mud.Core.Entities;
 
@@ -11,5 +10,5 @@ public class Party
     [Required]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     
-    public virtual List<PartyMember> Members { get; set; } = [];
+    public List<PartyMember> Members { get; set; } = [];
 }

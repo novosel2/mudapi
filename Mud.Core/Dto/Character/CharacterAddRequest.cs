@@ -16,9 +16,9 @@ public class CharacterAddRequest
     {
         return new Entities.Character()
         {
+            Id = accountId,
             Name = Name,
             ClassId = ClassId,
-            AccountId = accountId,
             AccountUsername = accountUsername,
             Level = 1,
             Experience = 0,

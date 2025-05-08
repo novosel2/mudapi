@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Mud.Core.IServices;
 
 namespace Mud.Api.Controllers;
 
@@ -8,27 +9,44 @@ namespace Mud.Api.Controllers;
 [Route("api/parties")]
 public class PartyController : ControllerBase
 {
-    public PartyController()
+    private readonly IPartyService _partyService;
+    
+    public PartyController(IPartyService partyService)
     {
-        
+        _partyService = partyService;
     }
     
     
     // GET: /api/parties
     
     [HttpGet]
-    public IActionResult GetParties()
+    public async Task<IActionResult> GetParties()
     {
-        return Ok();
+        var parties = await _partyService.GetAllAsync();
+        
+        return Ok(parties);
+    }
+    
+    
+    // GET: /api/parties/available-parties
+
+    [HttpGet("available-parties")]
+    public async Task<IActionResult> GetAvailableParties()
+    {
+        var parties = await _partyService.GetAllAvailableAsync();
+
+        return Ok(parties);
     }
     
     
     // POST: /api/parties
 
     [HttpPost]
-    public IActionResult AddParty()
+    public async Task<IActionResult> AddParty()
     {
-        return Ok();
+        var party = await _partyService.CreatePartyAsync();
+        
+        return Ok(party);
     }
     
     
