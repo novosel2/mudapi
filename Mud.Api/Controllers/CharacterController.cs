@@ -17,7 +17,7 @@ public class CharacterController : ControllerBase
         _characterService = characterService;
     }
 
-
+    // marko jebi se >:)
     // GET: /api/characters
     [HttpGet]
     public async Task<IActionResult> GetCharacters()
