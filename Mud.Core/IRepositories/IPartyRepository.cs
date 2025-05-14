@@ -16,6 +16,8 @@ public interface IPartyRepository
     /// <returns>List of available parties</returns>
     public Task<List<Party>> GetAllAvailableAsync();
 
+    public Task<Party?> GetByIdAsync(Guid partyId);
+
     /// <summary>
     /// Creates a new party in the database.
     /// </summary>
@@ -29,6 +31,13 @@ public interface IPartyRepository
     /// <param name="leaderId">ID of leader member</param>
     /// <returns>Party object with specified leader id</returns>
     public Task<Party?> GetByLeaderIdAsync(Guid leaderId);
+
+    /// <summary>
+    /// Deletes a party from the database.
+    /// </summary>
+    /// <param name="party">Party to delete</param>
+    /// <returns>Deleted object</returns>
+    public Party DeleteParty(Party party);
     
     /// <summary>
     /// Checks if any changes are saved to the database. Returns true if there are changes saved, false otherwise.

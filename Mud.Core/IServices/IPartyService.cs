@@ -21,5 +21,7 @@ public interface IPartyService
     /// </summary>
     /// <returns>Created party response</returns>
     public Task<PartyResponse> CreatePartyAsync();
+
+    public Task DeletePartyAsync(Guid partyId);
 }
 

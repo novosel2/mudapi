@@ -34,11 +34,29 @@ public class PartyRepository : IPartyRepository
             .ToListAsync();
     }
 
+    // Gets a party by id
+    public async Task<Party?> GetByIdAsync(Guid partyId)
+    {
+        return await _db.Parties
+            .Include(p => p.Members)
+            .ThenInclude(m => m.Character)
+            .ThenInclude(c => c.Class)
+            .SingleOrDefaultAsync(p => p.Id == partyId);
+    }
+
     // Creates a party in the database
     public async Task<Party> CreatePartyAsync(Party party)
     {
         var partyEntry = await _db.Parties.AddAsync(party);
         
+        return partyEntry.Entity;
+    }
+
+    // Deletes a party from the database
+    public Party DeleteParty(Party party)
+    {
+        var partyEntry = _db.Parties.Remove(party);
+
         return partyEntry.Entity;
     }
 

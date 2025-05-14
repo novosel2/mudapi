@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mud.Core.IServices;
+using System.Threading.Tasks;
 
 namespace Mud.Api.Controllers;
 
@@ -50,11 +51,13 @@ public class PartyController : ControllerBase
     }
     
     
-    // DELETE: /api/parties
+    // DELETE: /api/parties/{id}
     
-    [HttpDelete]
-    public IActionResult DeleteParty()
+    [HttpDelete("{id:partyId}")]
+    public async Task<IActionResult> DeleteParty(Guid partyId)
     {
+        await _partyService.DeletePartyAsync(partyId);
+
         return Ok();
     }
     

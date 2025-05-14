@@ -62,4 +62,18 @@ public class PartyService : IPartyService
         
         return party.ToResponse();        
     }
+
+    public async Task DeletePartyAsync(Guid partyId)
+    {
+        Party party = await _partyRepository.GetByIdAsync(partyId)
+            ?? throw new NotFoundException($"Party not found, ID: {partyId}");
+
+        if (!party.Members.Any(m => m.IsLeader == true && m.Id == _accountId))
+            throw new ForbiddenException("Not authorized to delete this party.");
+
+        _partyRepository.DeleteParty(party);
+
+        if (!await _partyRepository.IsSavedAsync())
+            throw new DbSavingFailedException("Failed to delete party from the database.");
+    }
 }
