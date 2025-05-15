@@ -53,10 +53,10 @@ public class PartyController : ControllerBase
     
     // DELETE: /api/parties/{id}
     
-    [HttpDelete("{id:partyId}")]
-    public async Task<IActionResult> DeleteParty(Guid partyId)
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteParty(Guid id)
     {
-        await _partyService.DeletePartyAsync(partyId);
+        await _partyService.DeletePartyAsync(id);
 
         return Ok();
     }
@@ -65,9 +65,11 @@ public class PartyController : ControllerBase
     // POST: /api/parties/join-party/{id}
 
     [HttpPost("join-party/{id:guid}")]
-    public IActionResult JoinParty(Guid id)
+    public async Task<IActionResult> JoinPartyAsync(Guid id)
     {
-        return Ok();
+        await _partyService.JoinPartyAsync(id);
+
+        return Ok("Joined successfully.");
     }
     
     

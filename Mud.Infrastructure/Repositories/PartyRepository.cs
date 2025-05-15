@@ -66,6 +66,12 @@ public class PartyRepository : IPartyRepository
         return await _db.Parties.SingleOrDefaultAsync(p => p.Members.Any(m => m.CharacterId == leaderId && m.IsLeader));
     }
 
+    // Adds a party member to the party
+    public async Task JoinPartyAsync(PartyMember partyMember)
+    {
+        await _db.PartyMembers.AddAsync(partyMember);
+    }
+
     // Checks if any changes are saved to the database. Returns true if there are changes saved, false otherwise.
     public async Task<bool> IsSavedAsync()
     {

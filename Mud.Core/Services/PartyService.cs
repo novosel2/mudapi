@@ -63,6 +63,7 @@ public class PartyService : IPartyService
         return party.ToResponse();        
     }
 
+    // Deletes a party from the database
     public async Task DeletePartyAsync(Guid partyId)
     {
         Party party = await _partyRepository.GetByIdAsync(partyId)
@@ -75,5 +76,30 @@ public class PartyService : IPartyService
 
         if (!await _partyRepository.IsSavedAsync())
             throw new DbSavingFailedException("Failed to delete party from the database.");
+    }
+
+    public async Task JoinPartyAsync(Guid partyId)
+    {
+        Party party = await _partyRepository.GetByIdAsync(partyId)
+            ?? throw new NotFoundException($"Party not found, ID: {partyId}");
+
+        if (party.Members.Any(m => m.CharacterId == _accountId))
+            throw new AlreadyExistsException("Account already joined this party.");
+
+        if (party.Members.Count >= 4)
+            throw new AlreadyExistsException("Party is full.");
+
+        PartyMember partyMember = new PartyMember()
+        {
+            CharacterId = _accountId,
+            PartyId = party.Id,
+            IsLeader = false,
+            IsReady = false
+        };
+
+        party.Members.Add(partyMember);
+
+        if (!await _partyRepository.IsSavedAsync())
+            throw new DbSavingFailedException("Failed to save party member to the database.");
     }
 }

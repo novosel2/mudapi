@@ -33,6 +33,12 @@ public interface IPartyRepository
     public Task<Party?> GetByLeaderIdAsync(Guid leaderId);
 
     /// <summary>
+    /// Adds a party member to the party.
+    /// </summary>
+    /// <returns>Party object</returns>
+    public Task JoinPartyAsync(PartyMember partyMember);
+
+    /// <summary>
     /// Deletes a party from the database.
     /// </summary>
     /// <param name="party">Party to delete</param>
