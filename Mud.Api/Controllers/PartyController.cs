@@ -75,8 +75,10 @@ public class PartyController : ControllerBase
     
     // POST: /api/parties/leave-party/{id}
     [HttpPost("leave-party")]
-    public IActionResult LeaveParty()
+    public async Task<IActionResult> LeaveParty()
     {
+        await _partyService.LeavePartyAsync();
+
         return Ok();
     }
 }

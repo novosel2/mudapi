@@ -26,9 +26,17 @@ public interface IPartyService
     /// Joins a party
     /// </summary>
     /// <param name="partyId">Party id to join</param>
-    /// <returns>Party response object</returns>
     public Task JoinPartyAsync(Guid partyId);
 
+    /// <summary>
+    /// Leaves the party
+    /// </summary>
+    public Task LeavePartyAsync();
+
+    /// <summary>
+    /// Delete party
+    /// </summary>
+    /// <param name="partyId">Party to delete</param>
     public Task DeletePartyAsync(Guid partyId);
 }
 

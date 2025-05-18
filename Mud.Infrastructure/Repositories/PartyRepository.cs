@@ -66,6 +66,16 @@ public class PartyRepository : IPartyRepository
         return await _db.Parties.SingleOrDefaultAsync(p => p.Members.Any(m => m.CharacterId == leaderId && m.IsLeader));
     }
 
+    // Gets a party by party member id
+    public async Task<Party?> GetByPartyMemberIdAsync(Guid memberId)
+    {
+        return await _db.Parties
+            .Include(p => p.Members)
+            .ThenInclude(m => m.Character)
+            .ThenInclude(c => c.Class)
+            .SingleOrDefaultAsync(p => p.Members.Any(m => m.CharacterId == memberId));
+    }
+
     // Adds a party member to the party
     public async Task JoinPartyAsync(PartyMember partyMember)
     {

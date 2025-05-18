@@ -102,4 +102,17 @@ public class PartyService : IPartyService
         if (!await _partyRepository.IsSavedAsync())
             throw new DbSavingFailedException("Failed to save party member to the database.");
     }
+
+    public async Task LeavePartyAsync()
+    {
+        Party party = await _partyRepository.GetByPartyMemberIdAsync(_accountId)
+            ?? throw new NotFoundException("Account is not in any parties.");
+
+        PartyMember partyMember = party.Members.Single(m => m.CharacterId == _accountId);
+
+        party.Members.Remove(partyMember);
+
+        if (!await _partyRepository.IsSavedAsync())
+            throw new DbSavingFailedException("Failed to leave party.");
+    }
 }

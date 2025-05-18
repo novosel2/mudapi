@@ -33,9 +33,15 @@ public interface IPartyRepository
     public Task<Party?> GetByLeaderIdAsync(Guid leaderId);
 
     /// <summary>
+    /// Gets a party by party member id.
+    /// </summary>
+    /// <param name="memberId">ID of member</param>
+    /// <returns>Party object with specified member</returns>
+    public Task<Party?> GetByPartyMemberIdAsync(Guid memberId);
+
+    /// <summary>
     /// Adds a party member to the party.
     /// </summary>
-    /// <returns>Party object</returns>
     public Task JoinPartyAsync(PartyMember partyMember);
 
     /// <summary>
