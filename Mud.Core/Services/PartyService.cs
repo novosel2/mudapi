@@ -110,6 +110,9 @@ public class PartyService : IPartyService
 
         PartyMember partyMember = party.Members.Single(m => m.CharacterId == _accountId);
 
+        if (partyMember.IsLeader)
+            throw new ForbiddenException("Party leader cannot leave the party. Please delete the party instead.");
+
         party.Members.Remove(partyMember);
 
         if (!await _partyRepository.IsSavedAsync())
