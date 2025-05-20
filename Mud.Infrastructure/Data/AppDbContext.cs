@@ -19,5 +19,6 @@ namespace Mud.Infrastructure.Data
         public DbSet<PartyMember> PartyMembers { get; set; }
         public DbSet<DungeonInstance> DungeonInstances { get; set; }
         public DbSet<CharacterInstanceState> CharacterInstanceStates { get; set; }
+        public DbSet<DungeonStory> DungeonStories { get; set; }
     }
 }
